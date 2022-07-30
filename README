@@ -1,0 +1,7 @@
+Trying here to cobble together some code to work with the bluez Bluetooth stack
+on Linux, specifically it's bluetooth-meshd, for BLE Mesh networking.
+
+Look at bluez' test-mesh example (python based) to see what I'm trying to
+recreate here.
+
+This wants sdbus-c++ - https://github.com/Kistler-Group/sdbus-cpp/
