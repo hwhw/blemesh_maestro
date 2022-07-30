@@ -5,3 +5,10 @@ Look at bluez' test-mesh example (python based) to see what I'm trying to
 recreate here.
 
 This wants sdbus-c++ - https://github.com/Kistler-Group/sdbus-cpp/
+
+Notes:
+
+  bluez/doc/mesh-api.txt
+
+  # your friend telling you what's going on:
+  busctl monitor org.bluez.mesh
