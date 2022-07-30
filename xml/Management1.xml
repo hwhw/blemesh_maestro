@@ -1,0 +1,59 @@
+<!DOCTYPE node PUBLIC "-//freedesktop//DTD D-BUS Object Introspection 1.0//EN" "http://www.freedesktop.org/standards/dbus/1.0/introspect.dtd">
+<node>
+	<interface name="org.bluez.mesh.Management1">
+		<method name="AddNode">
+			<arg name="uuid" type="ay" direction="in"/>
+			<arg name="options" type="a{sv}" direction="in"/>
+		</method>
+		<method name="ImportRemoteNode">
+			<arg name="primary" type="q" direction="in"/>
+			<arg name="count" type="y" direction="in"/>
+			<arg name="dev_key" type="ay" direction="in"/>
+		</method>
+		<method name="DeleteRemoteNode">
+			<arg name="primary" type="q" direction="in"/>
+			<arg name="count" type="y" direction="in"/>
+		</method>
+		<method name="UnprovisionedScan">
+			<arg name="options" type="a{sv}" direction="in"/>
+		</method>
+		<method name="UnprovisionedScanCancel">
+		</method>
+		<method name="CreateSubnet">
+			<arg name="net_index" type="q" direction="in"/>
+		</method>
+		<method name="UpdateSubnet">
+			<arg name="net_index" type="q" direction="in"/>
+		</method>
+		<method name="DeleteSubnet">
+			<arg name="net_index" type="q" direction="in"/>
+		</method>
+		<method name="ImportSubnet">
+			<arg name="net_index" type="q" direction="in"/>
+			<arg name="net_key" type="ay" direction="in"/>
+		</method>
+		<method name="CreateAppKey">
+			<arg name="net_index" type="q" direction="in"/>
+			<arg name="app_index" type="q" direction="in"/>
+		</method>
+		<method name="UpdateAppKey">
+			<arg name="app_index" type="q" direction="in"/>
+		</method>
+		<method name="DeleteAppKey">
+			<arg name="app_index" type="q" direction="in"/>
+		</method>
+		<method name="ImportAppKey">
+			<arg name="net_index" type="q" direction="in"/>
+			<arg name="app_index" type="q" direction="in"/>
+			<arg name="app_key" type="ay" direction="in"/>
+		</method>
+		<method name="SetKeyPhase">
+			<arg name="net_index" type="q" direction="in"/>
+			<arg name="phase" type="y" direction="in"/>
+		</method>
+		<method name="ExportKeys">
+			<arg name="net_keys" type="a(qaya{sv})" direction="out"/>
+			<arg name="dev_keys" type="a(qay)" direction="out"/>
+		</method>
+	</interface>
+</node>

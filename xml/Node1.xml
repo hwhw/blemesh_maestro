@@ -1,0 +1,47 @@
+<!DOCTYPE node PUBLIC "-//freedesktop//DTD D-BUS Object Introspection 1.0//EN" "http://www.freedesktop.org/standards/dbus/1.0/introspect.dtd">
+<node>
+	<interface name="org.bluez.mesh.Node1">
+		<method name="Send">
+			<arg name="element_path" type="o" direction="in"/>
+			<arg name="destination" type="q" direction="in"/>
+			<arg name="key_index" type="q" direction="in"/>
+			<arg name="options" type="a{sv}" direction="in"/>
+			<arg name="data" type="ay" direction="in"/>
+		</method>
+		<method name="DevKeySend">
+			<arg name="element_path" type="o" direction="in"/>
+			<arg name="destination" type="q" direction="in"/>
+			<arg name="remote" type="b" direction="in"/>
+			<arg name="net_index" type="q" direction="in"/>
+			<arg name="options" type="a{sv}" direction="in"/>
+			<arg name="data" type="ay" direction="in"/>
+		</method>
+		<method name="AddNetKey">
+			<arg name="element_path" type="o" direction="in"/>
+			<arg name="destination" type="q" direction="in"/>
+			<arg name="subnet_index" type="q" direction="in"/>
+			<arg name="net_index" type="q" direction="in"/>
+			<arg name="update" type="b" direction="in"/>
+		</method>
+		<method name="AddAppKey">
+			<arg name="element_path" type="o" direction="in"/>
+			<arg name="destination" type="q" direction="in"/>
+			<arg name="app_index" type="q" direction="in"/>
+			<arg name="net_index" type="q" direction="in"/>
+			<arg name="update" type="b" direction="in"/>
+		</method>
+		<method name="Publish">
+			<arg name="element_path" type="o" direction="in"/>
+			<arg name="model_id" type="q" direction="in"/>
+			<arg name="options" type="a{sv}" direction="in"/>
+			<arg name="data" type="ay" direction="in"/>
+		</method>
+		<property name="Features" type="a{sv}" access="read"/>
+		<property name="Beacon" type="b" access="read"/>
+		<property name="IvUpdate" type="b" access="read"/>
+		<property name="IvIndex" type="u" access="read"/>
+		<property name="SequenceNumber" type="u" access="read"/>
+		<property name="SecondsSinceLastHeard" type="u" access="read"/>
+		<property name="Addresses" type="aq" access="read"/>
+	</interface>
+</node>
