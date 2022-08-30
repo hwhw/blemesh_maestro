@@ -1,0 +1,36 @@
+<!DOCTYPE node PUBLIC "-//freedesktop//DTD D-BUS Object Introspection 1.0//EN" "http://www.freedesktop.org/standards/dbus/1.0/introspect.dtd">
+<node>
+	<interface name="org.bluez.mesh.ProvisionAgent1">
+		<method name="PrivateKey">
+      <arg name="key" type="ay" direction="out"/>
+		</method>
+		<method name="PublicKey">
+      <arg name="key" type="ay" direction="out"/>
+		</method>
+		<method name="DisplayString">
+      <arg name="value" type="s" direction="in"/>
+		</method>
+		<method name="DisplayNumeric">
+      <arg name="type" type="s" direction="in"/>
+      <arg name="number" type="u" direction="in"/>
+		</method>
+		<method name="PromptNumeric">
+      <arg name="type" type="s" direction="in"/>
+      <arg name="number" type="u" direction="out"/>
+		</method>
+		<method name="PromptStatic">
+      <arg name="type" type="s" direction="in"/>
+      <arg name="static" type="ay" direction="out"/>
+		</method>
+		<method name="Cancel">
+    </method>
+		<property name="Capabilities" type="as" access="read"/>
+    <property name="OutOfBandInfo" type="as" access="read"/>
+    <!-- optional:
+		<property name="URI" type="as" access="read"/>
+    -->
+	</interface>
+</node>
+
+
+

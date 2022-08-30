@@ -1,0 +1,29 @@
+<!DOCTYPE node PUBLIC "-//freedesktop//DTD D-BUS Object Introspection 1.0//EN" "http://www.freedesktop.org/standards/dbus/1.0/introspect.dtd">
+<node>
+	<interface name="org.bluez.mesh.Element1">
+		<method name="MessageReceived">
+			<arg name="source" type="q" direction="in"/>
+			<arg name="key_index" type="q" direction="in"/>
+			<arg name="destination" type="v" direction="in"/>
+      <arg name="data" type="ay" direction="in"/>
+		</method>
+		<method name="DevKeyMessageReceived">
+      <arg name="source" type="q" direction="in"/>
+      <arg name="remote" type="b" direction="in"/>
+			<arg name="net_index" type="q" direction="in"/>
+      <arg name="data" type="ay" direction="in"/>
+		</method>
+		<method name="UpdateModelConfiguration">
+      <arg name="model_id" type="q" direction="in"/>
+      <arg name="config" type="a{sv}" direction="in"/>
+    </method>
+		<property name="Index" type="y" access="read"/>
+    <property name="Models" type="a(qa{sv})" access="read"/>
+    <property name="VendorModels" type="a(qqa{sv})" access="read"/>
+    <!-- optional:
+    <property name="Location" type="q" access="read"/>
+    -->
+	</interface>
+</node>
+
+
