@@ -1,10 +1,21 @@
+You may rightfully curse this code, I haven't ever written modern C++
+(I vaguely remember having written some C++ more than a decade ago?)
+
 Trying here to cobble together some code to work with the bluez Bluetooth stack
 on Linux, specifically it's bluetooth-meshd, for BLE Mesh networking.
 
 Look at bluez' test-mesh example (python based) to see what I'm trying to
 recreate here.
 
-This wants sdbus-c++ - https://github.com/Kistler-Group/sdbus-cpp/
+This wants
+
+  Boost:
+    asio
+    program_options
+    uuids
+  fmtlib - https://github.com/fmtlib/fmt
+  scnlib - https://github.com/eliaskosunen/scnlib
+  sdbus-c++ - https://github.com/Kistler-Group/sdbus-cpp/
 
 Notes:
 
@@ -12,3 +23,65 @@ Notes:
 
   # your friend telling you what's going on:
   busctl monitor org.bluez.mesh
+
+How to build:
+  mkdir build
+  cd build
+  cmake ..
+  make
+
+How to use:
+  # run bluez meshd:
+  /usr/lib/bluetooth/bluetooth-meshd
+  # (probably, you can systemctl stop bluetooth; systemctl start bluetooth-mesh)
+
+  # provision a node for blemesh_maestro:
+  mesh-cfgclient
+  # in another terminal, run
+  ./blemesh_maestro -j
+  # copy displayed UUID (mesh-cfgclient will need the notation without dashes)
+  # in mesh-cfgclient session, do:
+  provision <uuid>
+  # follow the shown provisioning workflow, i.e. copy stuff between terminal sessions
+  # it will end in blemesh_maestro showing you a "token" number and mesh-cfgclient showing you the mesh address of the new node.
+  # keep that mesh-cfgclient session open, you will need it for managing appkeys (at least)
+
+  # attach blemesh_maestro to that new node object (you can do this again and again later on, so keep that token number safe)
+  ./blemesh_maestro -a <token>
+
+  # configure appkeys (e.g. n=0)
+  # in mesh-cfgclient session, do:
+  menu config
+  target <nodes mesh address>
+  appkey-add <n>
+
+It would be a bit far-fetched to explain all the Bluez and BLE Mesh specifics here. Be sure
+- that you have created the appkey first
+- that you have provisioned the target devices
+- that you have added the appkey to the target devices' models
+
+Stuff that will then work in blemesh_maestro:
+
+# send message to mesh address 00b5, using appkey 0, hex payload: 82 02 01
+send b5 0 82 02 1
+
+# send message to mesh address 00b5, using appkey 0, onoff model stuff:
+# get status:
+onoff b5 0 get
+# set status (on):
+onoff b5 0 set 1
+# set status on auto-TID, transition time 30 * 100ms(=0), delay 200*5ms
+onoff b5 0 set 0 -1 30 0 200
+# get current level
+level b5 0 get
+# set level delta -1
+level b5 0 delta -1
+
+TODO:
+write lots of documentation (haha, let's see)
+- code
+- command documentation
+write parsers for incoming messages
+
+Instead of reading commands from stdin, you can also specify a unix datagram socket (will be deleted & created) with the "-s" argument.
+

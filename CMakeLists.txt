@@ -15,7 +15,11 @@ find_package(Boost REQUIRED COMPONENTS
 
 find_package(sdbus-c++-tools REQUIRED)
 
-target_link_libraries(blemesh_maestro sdbus-c++ Boost::program_options)
+find_package(scn CONFIG REQUIRED)
+
+find_package(fmt REQUIRED)
+
+target_link_libraries(blemesh_maestro sdbus-c++ Boost::program_options scn::scn fmt::fmt)
 
 # Use the sdbus-c++-xml2cpp in SDBusCpp namespace to generate the headers
 add_custom_command(
